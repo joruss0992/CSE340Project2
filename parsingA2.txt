@@ -1,0 +1,213 @@
+void parseProgram()
+{
+	token1 = getToken();
+	token2 = getToken();
+	if(token1 == ID && token2 == COMMA)
+	{
+		ungetToken(token2);
+		ungetToken(token1);
+		parseGlobalVars();
+		token1 = getToken();
+		if(token1 == EOF)
+		{
+
+		} else {
+			Syntax err
+		}
+	} else if(token1 == ID && token2 == LBRACE){
+		ungetToken(token2);
+		ungetToken(token1);
+		parseScope();
+		token1 = getToken();
+		if(token1 == EOF)
+		{
+		
+		} else {
+			Syntax err
+		}
+	} else {
+		Syntax err
+	}
+}
+-------------------------------------------------
+void parseGlobalVars()
+{
+	token1 = getToken();
+	if(token1 == ID)
+	{
+		ungetToken();
+		parseVarList();
+		token1 = getToken();
+		if(token1 == SEMICOLON)
+		{
+			return;
+		} else {
+			Syntax err
+		}
+	} else {
+		Syntax err
+	}
+}
+-------------------------------------------------
+void parseScope()
+{
+	token1 = getToken();
+	if(token1 == ID)
+	{
+		token2 = getToken();
+		if(token2 == LBRACE)
+		{
+			//no need to unget token here (it's a terminal)
+			parsePublicVars();
+			parsePrivateVars();
+			parseStmtList();
+			token1 = getToken();
+			if(token1 == RBRACE)
+			{
+				return;
+			} else 
+				Syntax err
+			}
+		} else {
+			Syntax err
+	} else {
+		Syntax err
+}
+-------------------------------------------------
+void parsePublicVars()
+{
+	token1 = getToken();
+	if(token1 == public)
+	{
+		token1 = getToken();
+		if(token1 == COLON)
+		{
+			parseVarList();
+			token1 = getToken();
+			if(token1 == SEMICOLON)
+			{
+				return;
+			} else {
+				Syntax err
+			}
+		} else {
+			Syntax err
+		}
+
+	} else if(token1 == private) {
+		ungetToken(token1);
+		return;
+	} else if (token1 == ID) {
+		ungetToken(token1);
+		return;
+	} else {
+		Syntax err
+	}
+}
+-------------------------------------------------
+void parsePrivateVars()
+{
+	token1 = getToken();
+	if(token1 == private)
+	{
+		token1 = getToken();
+		if(token1 == COLON)
+		{
+			parseVarList();
+			token1 = getToken();
+			if(token1 == SEMICOLON)
+			{
+				return;
+			} else {
+				Syntax err
+			}
+		} else {
+			Syntax err
+		}
+
+	} else if (token1 == ID) {
+		ungetToken(token1);
+		return;
+	} else {
+		Syntax err
+	}
+}
+-------------------------------------------------
+void parseVarList()
+{
+	token1 = getToken();
+	if(token1 == ID)
+	{
+		token1 = getToken();
+		if(token1 == COMMA)
+		{
+			parseVarList();
+		} else if(token1 == SEMICOLON) {
+			ungetToken(token1);
+			return;
+		} else {
+			Syntax err
+		}
+	} else {
+		Syntax err
+	}
+}
+-------------------------------------------------
+void parseStmtList()
+{
+	token1 = getToken();
+	token2 = getToken();
+	if(token1 == ID && token2 == LBRACE)
+	{
+		ungetToken(token2);
+		ungetToken(token1);
+		parseScope();
+		return;
+	} else if(token1 == ID && token2 == EQUAL) {
+		ungetToken(token2);
+		ungetToken(token1);
+		parseStmt();
+		token1 = getToken();
+		if(token1 == ID)
+		{
+			ungetToken(token1);
+			parseStmtList();
+		} else if(token1 == RBRACE){
+			ungetToken(token1);
+			return;
+		} else {
+			Syntax err
+		}
+	} else {
+		Syntax err
+	}
+}
+-------------------------------------------------
+void parseStmt()
+{
+	token1 = getToken();
+	if(token1 == ID)
+	{
+		token1 = getToken();
+		if(token1 == EQUAL)
+		{
+			token1 = getToken();
+			if(token1 == ID)
+			{
+				token1 = getToken();
+				if(token1 == SEMICOLON)
+				{
+					return;
+				} else { 
+					Syntax err 
+				}
+			} else { 
+				Syntax err 
+			}
+		} else {
+			Syntax err
+		}
+	} else { 
+		Syntax err 
+	}
+}

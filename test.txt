@@ -1,0 +1,517 @@
+========================================================
+FILE: test_comments_01.diff
+========================================================
+// Comment on a line by itself
+xyz, it, c4;
+
+hello {
+  public: xyz, it;
+  private: c4, dd;
+  
+  world1 {
+    xyz = it;
+    c4 = dd;
+  }
+  world2 {
+    public: xyz, c4;
+
+    xyz = it;
+    c4 = dd;
+  }
+}
+--------------------------------------------------------
+1,58c1,4
+< { , DIV , 1}
+< { , DIV , 1}
+< {Comment , ID , 1}
+< {on , ID , 1}
+< {a , ID , 1}
+< {line , ID , 1}
+< {by , ID , 1}
+< {itself , ID , 1}
+< {xyz , ID , 2}
+< { , COMMA , 2}
+< {it , ID , 2}
+< { , COMMA , 2}
+< {c4 , ID , 2}
+< { , SEMICOLON , 2}
+< {hello , ID , 4}
+< { , ERROR , 4}
+< {public , ID , 5}
+< { , COLON , 5}
+< {xyz , ID , 5}
+< { , COMMA , 5}
+< {it , ID , 5}
+< { , SEMICOLON , 5}
+< {private , ID , 6}
+< { , COLON , 6}
+< {c4 , ID , 6}
+< { , COMMA , 6}
+< {dd , ID , 6}
+< { , SEMICOLON , 6}
+< {world1 , ID , 8}
+< { , ERROR , 8}
+< {xyz , ID , 9}
+< { , EQUAL , 9}
+< {it , ID , 9}
+< { , SEMICOLON , 9}
+< {c4 , ID , 10}
+< { , EQUAL , 10}
+< {dd , ID , 10}
+< { , SEMICOLON , 10}
+< { , ERROR , 11}
+< {world2 , ID , 12}
+< { , ERROR , 12}
+< {public , ID , 13}
+< { , COLON , 13}
+< {xyz , ID , 13}
+< { , COMMA , 13}
+< {c4 , ID , 13}
+< { , SEMICOLON , 13}
+< {xyz , ID , 15}
+< { , EQUAL , 15}
+< {it , ID , 15}
+< { , SEMICOLON , 15}
+< {c4 , ID , 16}
+< { , EQUAL , 16}
+< {dd , ID , 16}
+< { , SEMICOLON , 16}
+< { , ERROR , 17}
+< { , ERROR , 18}
+< { , END_OF_FILE , 20}
+---
+> hello.xyz = hello.it
+> ::c4 = ?.dd
+> world2.xyz = hello.it
+> world2.c4 = ?.dd
+========================================================
+FILE: test_comments_02.diff
+========================================================
+xyz, it, c4;
+
+hello {
+  public: xyz, it;
+  private: c4, dd;
+
+// Comment on a line by itself followed by spaces
+        
+   
+ 
+  world1 {
+    xyz = it;
+    c4 = dd;
+  }
+  world2 {
+    public: xyz, c4;
+
+    xyz = it;
+    c4 = dd;
+  }
+}
+--------------------------------------------------------
+1,61c1,4
+< {xyz , ID , 1}
+< { , COMMA , 1}
+< {it , ID , 1}
+< { , COMMA , 1}
+< {c4 , ID , 1}
+< { , SEMICOLON , 1}
+< {hello , ID , 3}
+< { , ERROR , 3}
+< {public , ID , 4}
+< { , COLON , 4}
+< {xyz , ID , 4}
+< { , COMMA , 4}
+< {it , ID , 4}
+< { , SEMICOLON , 4}
+< {private , ID , 5}
+< { , COLON , 5}
+< {c4 , ID , 5}
+< { , COMMA , 5}
+< {dd , ID , 5}
+< { , SEMICOLON , 5}
+< { , DIV , 7}
+< { , DIV , 7}
+< {Comment , ID , 7}
+< {on , ID , 7}
+< {a , ID , 7}
+< {line , ID , 7}
+< {by , ID , 7}
+< {itself , ID , 7}
+< {followed , ID , 7}
+< {by , ID , 7}
+< {spaces , ID , 7}
+< {world1 , ID , 11}
+< { , ERROR , 11}
+< {xyz , ID , 12}
+< { , EQUAL , 12}
+< {it , ID , 12}
+< { , SEMICOLON , 12}
+< {c4 , ID , 13}
+< { , EQUAL , 13}
+< {dd , ID , 13}
+< { , SEMICOLON , 13}
+< { , ERROR , 14}
+< {world2 , ID , 15}
+< { , ERROR , 15}
+< {public , ID , 16}
+< { , COLON , 16}
+< {xyz , ID , 16}
+< { , COMMA , 16}
+< {c4 , ID , 16}
+< { , SEMICOLON , 16}
+< {xyz , ID , 18}
+< { , EQUAL , 18}
+< {it , ID , 18}
+< { , SEMICOLON , 18}
+< {c4 , ID , 19}
+< { , EQUAL , 19}
+< {dd , ID , 19}
+< { , SEMICOLON , 19}
+< { , ERROR , 20}
+< { , ERROR , 21}
+< { , END_OF_FILE , 23}
+---
+> hello.xyz = hello.it
+> ::c4 = ?.dd
+> world2.xyz = hello.it
+> world2.c4 = ?.dd
+========================================================
+FILE: test_comments_03.diff
+========================================================
+xyz, it, c4;
+
+hello {
+  public: xyz, it;
+  private: c4, dd;
+  
+  world1 {
+    xyz = it;
+    c4 = dd;
+  }
+// Comment on a line by itself
+// Followed by another comment
+  world2 {
+    public: xyz, c4;
+
+    xyz = it;
+    c4 = dd;
+  }
+}
+--------------------------------------------------------
+1,64c1,4
+< {xyz , ID , 1}
+< { , COMMA , 1}
+< {it , ID , 1}
+< { , COMMA , 1}
+< {c4 , ID , 1}
+< { , SEMICOLON , 1}
+< {hello , ID , 3}
+< { , ERROR , 3}
+< {public , ID , 4}
+< { , COLON , 4}
+< {xyz , ID , 4}
+< { , COMMA , 4}
+< {it , ID , 4}
+< { , SEMICOLON , 4}
+< {private , ID , 5}
+< { , COLON , 5}
+< {c4 , ID , 5}
+< { , COMMA , 5}
+< {dd , ID , 5}
+< { , SEMICOLON , 5}
+< {world1 , ID , 7}
+< { , ERROR , 7}
+< {xyz , ID , 8}
+< { , EQUAL , 8}
+< {it , ID , 8}
+< { , SEMICOLON , 8}
+< {c4 , ID , 9}
+< { , EQUAL , 9}
+< {dd , ID , 9}
+< { , SEMICOLON , 9}
+< { , ERROR , 10}
+< { , DIV , 11}
+< { , DIV , 11}
+< {Comment , ID , 11}
+< {on , ID , 11}
+< {a , ID , 11}
+< {line , ID , 11}
+< {by , ID , 11}
+< {itself , ID , 11}
+< { , DIV , 12}
+< { , DIV , 12}
+< {Followed , ID , 12}
+< {by , ID , 12}
+< {another , ID , 12}
+< {comment , ID , 12}
+< {world2 , ID , 13}
+< { , ERROR , 13}
+< {public , ID , 14}
+< { , COLON , 14}
+< {xyz , ID , 14}
+< { , COMMA , 14}
+< {c4 , ID , 14}
+< { , SEMICOLON , 14}
+< {xyz , ID , 16}
+< { , EQUAL , 16}
+< {it , ID , 16}
+< { , SEMICOLON , 16}
+< {c4 , ID , 17}
+< { , EQUAL , 17}
+< {dd , ID , 17}
+< { , SEMICOLON , 17}
+< { , ERROR , 18}
+< { , ERROR , 19}
+< { , END_OF_FILE , 21}
+---
+> hello.xyz = hello.it
+> ::c4 = ?.dd
+> world2.xyz = hello.it
+> world2.c4 = ?.dd
+========================================================
+FILE: test_names_01.diff
+========================================================
+
+hello {
+  abc = t;
+}
+--------------------------------------------------------
+1,8c1
+< {hello , ID , 2}
+< { , ERROR , 2}
+< {abc , ID , 3}
+< { , EQUAL , 3}
+< {t , ID , 3}
+< { , SEMICOLON , 3}
+< { , ERROR , 4}
+< { , END_OF_FILE , 6}
+---
+> ?.abc = ?.t
+========================================================
+FILE: test_names_02.diff
+========================================================
+abc;
+
+hello {
+  abc = t;
+}
+--------------------------------------------------------
+1,10c1
+< {abc , ID , 1}
+< { , SEMICOLON , 1}
+< {hello , ID , 3}
+< { , ERROR , 3}
+< {abc , ID , 4}
+< { , EQUAL , 4}
+< {t , ID , 4}
+< { , SEMICOLON , 4}
+< { , ERROR , 5}
+< { , END_OF_FILE , 7}
+---
+> ::abc = ?.t
+========================================================
+FILE: test_names_16.diff
+========================================================
+xyz, rst, tmp;
+
+hello {
+  public: xyz, rst;
+  private: tmp, abc;
+  
+  world1 {
+    xyz = rst;
+    tmp = abc;
+  }
+  world2 {
+    public: xyz, tmp;
+
+    xyz = rst;
+    tmp = abc;
+  }
+}
+--------------------------------------------------------
+1,50c1,4
+< {xyz , ID , 1}
+< { , COMMA , 1}
+< {rst , ID , 1}
+< { , COMMA , 1}
+< {tmp , ID , 1}
+< { , SEMICOLON , 1}
+< {hello , ID , 3}
+< { , ERROR , 3}
+< {public , ID , 4}
+< { , COLON , 4}
+< {xyz , ID , 4}
+< { , COMMA , 4}
+< {rst , ID , 4}
+< { , SEMICOLON , 4}
+< {private , ID , 5}
+< { , COLON , 5}
+< {tmp , ID , 5}
+< { , COMMA , 5}
+< {abc , ID , 5}
+< { , SEMICOLON , 5}
+< {world1 , ID , 7}
+< { , ERROR , 7}
+< {xyz , ID , 8}
+< { , EQUAL , 8}
+< {rst , ID , 8}
+< { , SEMICOLON , 8}
+< {tmp , ID , 9}
+< { , EQUAL , 9}
+< {abc , ID , 9}
+< { , SEMICOLON , 9}
+< { , ERROR , 10}
+< {world2 , ID , 11}
+< { , ERROR , 11}
+< {public , ID , 12}
+< { , COLON , 12}
+< {xyz , ID , 12}
+< { , COMMA , 12}
+< {tmp , ID , 12}
+< { , SEMICOLON , 12}
+< {xyz , ID , 14}
+< { , EQUAL , 14}
+< {rst , ID , 14}
+< { , SEMICOLON , 14}
+< {tmp , ID , 15}
+< { , EQUAL , 15}
+< {abc , ID , 15}
+< { , SEMICOLON , 15}
+< { , ERROR , 16}
+< { , ERROR , 17}
+< { , END_OF_FILE , 19}
+---
+> hello.xyz = hello.rst
+> ::tmp = ?.abc
+> world2.xyz = hello.rst
+> world2.tmp = ?.abc
+========================================================
+FILE: test_parsing_error01.diff
+========================================================
+
+hello {
+  age = nine
+}
+--------------------------------------------------------
+1,7c1
+< {hello , ID , 2}
+< { , ERROR , 2}
+< {age , ID , 3}
+< { , EQUAL , 3}
+< {nine , ID , 3}
+< { , ERROR , 4}
+< { , END_OF_FILE , 6}
+---
+> Syntax Error
+========================================================
+FILE: test_parsing_error02.diff
+========================================================
+age
+
+hello {
+  age = ten;
+}
+--------------------------------------------------------
+1,9c1
+< {age , ID , 1}
+< {hello , ID , 3}
+< { , ERROR , 3}
+< {age , ID , 4}
+< { , EQUAL , 4}
+< {ten , ID , 4}
+< { , SEMICOLON , 4}
+< { , ERROR , 5}
+< { , END_OF_FILE , 7}
+---
+> Syntax Error
+========================================================
+FILE: test_parsing_error03.diff
+========================================================
+age ten;
+
+hello {
+  age = ten;
+}
+--------------------------------------------------------
+1,11c1
+< {age , ID , 1}
+< {ten , ID , 1}
+< { , SEMICOLON , 1}
+< {hello , ID , 3}
+< { , ERROR , 3}
+< {age , ID , 4}
+< { , EQUAL , 4}
+< {ten , ID , 4}
+< { , SEMICOLON , 4}
+< { , ERROR , 5}
+< { , END_OF_FILE , 7}
+---
+> Syntax Error
+========================================================
+FILE: test_parsing_ok01.diff
+========================================================
+
+hello {
+  age = nine;
+}
+--------------------------------------------------------
+1,8c1
+< {hello , ID , 2}
+< { , ERROR , 2}
+< {age , ID , 3}
+< { , EQUAL , 3}
+< {nine , ID , 3}
+< { , SEMICOLON , 3}
+< { , ERROR , 4}
+< { , END_OF_FILE , 6}
+---
+> ?.age = ?.nine
+========================================================
+FILE: test_parsing_ok02.diff
+========================================================
+age;
+
+hello {
+  age = ten;
+}
+--------------------------------------------------------
+1,10c1
+< {age , ID , 1}
+< { , SEMICOLON , 1}
+< {hello , ID , 3}
+< { , ERROR , 3}
+< {age , ID , 4}
+< { , EQUAL , 4}
+< {ten , ID , 4}
+< { , SEMICOLON , 4}
+< { , ERROR , 5}
+< { , END_OF_FILE , 7}
+---
+> ::age = ?.ten
+========================================================
+FILE: test_parsing_ok03.diff
+========================================================
+age, ten;
+
+hello {
+  age = ten;
+}
+--------------------------------------------------------
+1,12c1
+< {age , ID , 1}
+< { , COMMA , 1}
+< {ten , ID , 1}
+< { , SEMICOLON , 1}
+< {hello , ID , 3}
+< { , ERROR , 3}
+< {age , ID , 4}
+< { , EQUAL , 4}
+< {ten , ID , 4}
+< { , SEMICOLON , 4}
+< { , ERROR , 5}
+< { , END_OF_FILE , 7}
+---
+> ::age = ::ten
+0
